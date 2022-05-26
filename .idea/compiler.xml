@@ -7,8 +7,11 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="antraJava" />
+        <module name="HWday17" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="antraJava" target="16" />
+    </bytecodeTargetLevel>
   </component>
 </project>

@@ -20,8 +20,9 @@ public class JdbcExample {
     static final String PASS = "321456";
 
     public static void main(String[] args) {
+
         Connection conn = null;
-        PreparedStatement stmt = null;
+        PreparedStatement stmt = null;//防止sql注入
 
         try {
             //STEP 2: Register JDBC driver -> DriverManager
@@ -30,12 +31,13 @@ public class JdbcExample {
             //STEP 3: Open a connection
             System.out.println("Connecting to database...");
             conn = DriverManager.getConnection(DB_URL,USER,PASS);
-            conn.setAutoCommit(false);
+            conn.setAutoCommit(false);//开启transaction
             //STEP 4: Execute a query
             System.out.println("Creating statement...");
             String sql2 = "select * from java.employee;";
 //            String sql3 = "SELECT .... first, last, age FROM Employees WHERE age .. And first = ";
 //            String sql4 = "SELECT .... first, last, age FROM Employees WHERE age or first..";
+//            Statement stmt = conn.createStatement();
             stmt = conn.prepareStatement(sql2);
             ResultSet rs = stmt.executeQuery();
 
@@ -46,8 +48,8 @@ public class JdbcExample {
                 String last = rs.getString("salary");
 
                 //Display values
-                System.out.print(", First: " + first);
-                System.out.println(", Last: " + last);
+                System.out.print("First: " + first);
+                System.out.println("Last: " + last);
             }
             conn.commit();
             //STEP 6: Clean-up environment
